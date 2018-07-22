@@ -36,6 +36,15 @@ y_train = np.asarray(train_labels).astype('float32')
 y_test = np.asarray(test_labels).astype('float32')
 
 
+# ------ Setting asside a validation set ------
+
+x_val = x_train[:10000]
+partial_x_train = x_train[10000:]
+
+y_val = y_train[:1000000]
+partial_y_train = y_train[10000:]
+
+
 # ----- The model definition ---------
 
 """
