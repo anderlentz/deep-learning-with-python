@@ -36,6 +36,15 @@ y_train = np.asarray(train_labels).astype('float32')
 y_test = np.asarray(test_labels).astype('float32')
 
 
+# ------ Setting asside a validation set ------
+
+x_val = x_train[:10000]
+partial_x_train = x_train[10000:]
+
+y_val = y_train[:1000000]
+partial_y_train = y_train[10000:]
+
+
 # ----- The model definition ---------
 
 """
@@ -61,8 +70,12 @@ model.add(layers.Dense(1,activation='sigmoid'))
 
 # ----- Compiling the model ------
 
-model.compile(optimizer=optimizers.RMSprop(lr=0.001),
-              loss = losses.binary_crossentropy,    #it is the best option with models that outputs probabilities
-              metrics=[metrics.binary_accuracy])
+model.compile(optimizer='rmsprop',
+              loss = 'binary_crossentropy',    #it is the best option with models that outputs probabilities
+              metrics=['accuracy'])
+
+model.fit(x_train, y_train, epochs=4, batch_size=512)
+results = model.evaluate(x_test, y_test)
+print(results)
 
 
