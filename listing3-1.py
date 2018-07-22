@@ -1,15 +1,15 @@
 """
     Binary classification: Classify movie reviews as positive or negativE
     Used IMDB dataset from keras
-    This exercise is from the book Deep Learning with Python, page 68
-
-
-
+    This exercise is from the book Deep Learning with Python, it starts at page 68
 """
 
 from keras.datasets import imdb
 from keras import models
 from keras import layers
+from keras import optimizers
+from keras import losses
+from keras import metrics
 import numpy as np
 
 (train_data,train_labels),(test_data, test_labels) = imdb.load_data(num_words = 10000)
@@ -57,5 +57,12 @@ model.add(layers.Dense(16,activation='relu'))
 
 # the final layer uses sigmoid activation to output a probability
 model.add(layers.Dense(1,activation='sigmoid'))
+
+
+# ----- Compiling the model ------
+
+model.compile(optimizer=optimizers.RMSprop(lr=0.001),
+              loss = losses.binary_crossentropy,    #it is the best option with models that outputs probabilities
+              metrics=[metrics.binary_accuracy])
 
 
