@@ -34,7 +34,7 @@ y_train = np.asarray(train_labels).astype('float32')
 y_test = np.asarray(test_labels).astype('float32')
 
 
-# ------ Setting asside a validation set ------
+# ------ Setting aside a validation set ------
 
 x_val = x_train[:10000]
 partial_x_train = x_train[10000:]
@@ -76,9 +76,27 @@ model.compile(optimizer='rmsprop',
 
 history = model.fit(x_train,
                     y_train,
-                    epochs=4,
+                    epochs=20,
                     batch_size=512,
                     validation_data = (x_val,y_val))
+
+# ------ Plotting the training and validation loss -------
+
+history_dict = history.history
+
+loss_values = history_dict['loss']
+val_loss_values = history_dict['val_loss']
+acc = history_dict['acc']
+
+epochs = range(1,len(acc)+1)
+
+plt.plot(epochs, loss_values, 'bo', label='Training loss')
+plt.plot(epochs, val_loss_values, 'b', label='Validation loss')
+plt.title('Training and validation loss')
+plt.xlabel('Epochs')
+plt.ylabel('Loss')
+plt.legend()
+plt.show()
 
 results = model.evaluate(x_test, y_test)
 print(results)
