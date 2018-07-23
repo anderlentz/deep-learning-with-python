@@ -74,11 +74,14 @@ model.compile(optimizer='rmsprop',
 
 
 
-history = model.fit(x_train,
-                    y_train,
+history = model.fit(partial_x_train,
+                    partial_y_train,
                     epochs=20,
                     batch_size=512,
                     validation_data = (x_val,y_val))
+
+results = model.evaluate(x_test, y_test)
+print(results)
 
 # ------ Plotting the training and validation loss -------
 
@@ -98,8 +101,6 @@ plt.ylabel('Loss')
 plt.legend()
 plt.show()
 
-results = model.evaluate(x_test, y_test)
-print(results)
 
 
 
