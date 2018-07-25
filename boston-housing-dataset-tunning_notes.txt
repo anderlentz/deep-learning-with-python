@@ -1,0 +1,24 @@
+Boston housing dataset - Tunning notes
+
+- 100 epochs
+All mae scores Mean:
+ 3.402463484624825	-+ epoch 80 increases validation MAE scores
+	- First thing to test is decrease epochs quantity to 80
+
+
+- 80 epochs
+All mae scores Mean:
+ 3.5907180410284214	
+
+- 80 epochs
+- Adjusting size of the hidden layers to 128
+All mae scores Mean:
+ 3.2800380111802925
+
+- 80 epochs
+- Adjusting size of the first hidden layers to 128
+- Adjusting size of the second hidden layers to 256
+All mae scores Mean:
+ 3.305125606242973
+
+
