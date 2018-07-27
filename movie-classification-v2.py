@@ -1,13 +1,13 @@
-"""
-    Binary classification: Classify movie reviews as positive or negative
-    Used IMDB dataset from keras
-    This exercise is from the book Deep Learning with Python
-    Now we are trying to deal with the overfitting issue
-"""
-
+##############################################################################
+#    Binary classification: Classify movie reviews as positive or negative
+#    Used IMDB dataset from keras
+#    This exercise is from the book Deep Learning with Python
+#    Now we are trying to deal with the overfitting issue by adding L2 weight regularization to the model
+##############################################################################
 from keras.datasets import imdb
 from keras import models
 from keras import layers
+from keras import regularizers
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -46,14 +46,17 @@ partial_y_train = y_train[10000:]
 
 """
     The model definition:
-    We are trying to prevent overfitting reducing the model size. Then we are diminishing the model's capacity.
-    So, the layer's size was decreased to 4 (compare with listing3-1.py)
-
+    We are trying to prevent overfitting by adding L2 weight regularization.
 """
 
 model = models.Sequential()
-model.add(layers.Dense(4, activation='relu', input_shape=(10000,)))
-model.add(layers.Dense(4, activation='relu'))
+model.add(layers.Dense(16,
+                       kernel_regularizer=regularizers.l2(0.001),
+                       activation='relu',
+                       input_shape=(10000,)))
+model.add(layers.Dense(16,
+                       kernel_regularizer=regularizers.l2(0.001),
+                       activation='relu'))
 
 # the final layer uses sigmoid activation to output a probability
 model.add(layers.Dense(1, activation='sigmoid'))
