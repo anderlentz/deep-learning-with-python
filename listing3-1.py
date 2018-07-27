@@ -76,7 +76,7 @@ model.compile(optimizer='rmsprop',
 
 history = model.fit(partial_x_train,
                     partial_y_train,
-                    epochs=4,
+                    epochs=20,
                     batch_size=512,
                     validation_data = (x_val,y_val))
 
@@ -101,6 +101,18 @@ plt.ylabel('Loss')
 plt.legend()
 plt.show()
 
+# Plotting the training and validation accuracy, pg 75
+plt.clf()
+acc_values = history_dict['acc']
+val_acc_values= history_dict['val_acc']
+
+plt.plot(epochs, acc_values, 'bo', label='Training acc')
+plt.plot(epochs, val_acc_values, 'b', label='Validation acc')
+plt.title('Training and validation accuracy')
+plt.xlabel('Epochs')
+plt.ylabel('Loss')
+plt.legend()
+plt.show()
 
 
 
