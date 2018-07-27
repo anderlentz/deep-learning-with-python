@@ -86,15 +86,15 @@ history_L2_reg = model.fit(partial_x_train,
 results_with_L2 = model.evaluate(x_test, y_test)
 
 # Results
-print('Result without L2 regularization: \n', results_without_l2_reg)
-print('Result with L2 regularization: \n', results_with_L2)
+print('Result without L2 regularization: \n Loss: ', results_without_l2_reg[0],' \nAccuracy: ',results_without_l2_reg[1])
+print('Result with L2 regularization: \n Loss: ', results_with_L2[0], '\nAccuracy: ',results_with_L2[1])
 
 # Plotting the training and validation loss
 history_dict = history.history
-history_dict_size4 = history_L2_reg.history
+history_dict_L2_reg = history_L2_reg.history
 
 val_loss_values = history_dict['val_loss']
-val_size_L2_regularized = history_dict_size4['val_loss']
+val_size_L2_regularized = history_dict_L2_reg['val_loss']
 acc = history_dict['acc']
 
 epochs = range(1, len(acc) + 1)
